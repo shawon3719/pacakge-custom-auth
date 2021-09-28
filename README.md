@@ -30,8 +30,13 @@
 |Soft Deleted Users Management System|
 
 ### Installation Instructions
-1. Setup your email configuration to your `.env` file
-2. From the projects root folder run:
+1. run :
+```
+composer require sws/smartauth
+
+```
+2. Setup your email configuration to your `.env` file
+3. From the projects root folder run:
 ```
 php artisan vendor:publish --tag=sws-auth
 
