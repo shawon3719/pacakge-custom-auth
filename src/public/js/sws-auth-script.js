@@ -117,6 +117,32 @@ $(document).ready(function () {
 
     //reset-form validation
 
+    $('#forgot_password_form').bootstrapValidator({
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter your email address'
+                    },
+                    emailAddress: {
+                        message: 'Please enter a valid email address'
+                    }
+                }
+            },
+
+        },
+        submitHandler: function(validator, form) {
+            $('#registration_success').slideDown({ opacity: "show" }, "slow");                
+        }
+    });
+
+    //reset-form validation
+
     $('#password_reset_form').bootstrapValidator({
         feedbackIcons: {
             valid: 'glyphicon glyphicon-ok',

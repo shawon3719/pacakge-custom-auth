@@ -27,35 +27,41 @@
                 <strong>Sorry!</strong> {{ Session::get('failed') }}
             </div>
         @endif
-
-        <form class="well form-horizontal" action="{{route('auth.forgot.password')}}" method="post" id="registration_form">
-            @csrf
-            <fieldset>
-                <legend>Reset Your Password</legend>
-                <div class="form-group">
-                    <label class="col-md-4 control-label">E-Mail</label>
-                    <div class="col-md-4 ">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                            <input name="email" maxlength="30" placeholder="E-Mail" class="form-control" type="text">  
+        <div id="card">
+            <div id="card-content">
+              <div id="card-title">
+                <h2>RESET PASSWORD</h2>
+                <div class="underline-title"></div>
+              </div>
+              <form class="form-horizontal" action="{{route('auth.forgot.password')}}" method="post" id="forgot_password_form">
+                @csrf
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-md-12">E-mail</label>
+                        <small class="col-md-12" style="font-size: 10px; margin-bottom: 10px">Please enter your email. we will send you a password reset link on your email.</small>
+                        <div class="col-md-12 ">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                <input name="email" maxlength="30" placeholder="E-Mail" class="form-control" type="text">  
+                            </div>
+                            @if ($errors->has('email'))
+                                <small class="text-danger">{{ $errors->first('email') }}</small>
+                            @endif
                         </div>
-                        <small style="font-size: 10px">Please enter your email. we will send you a password reset link on your email.</small>
-                        @if ($errors->has('email'))
-                            <small class="text-danger">{{ $errors->first('email') }}</small>
-                        @endif
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-4 control-label"></label>
-                    <div class="col-md-4">
-                        <button type="submit" class="form-control btn btn-primary login-button">Request Reset</button>
-                        <p class="instruction-text">Password Remembered? <a href="{{route('auth.login.index')}}">Login</a></p>
-                        <p class="instruction-text">Don't have an account? <a href="{{route('auth.register.index')}}">Register</a></p>
+                    <div class="form-group">
+                        <label class="col-md-12 control-label"></label>
+                        <div class="col-md-12">
+                            <button type="submit" id="submit-btn">Request Reset</button>
+                            <p id="signup">Password Remembered? <a href="{{route('auth.login.index')}}">Login</a></p>
+                            <p id="signup">Don't have an account? <a href="{{route('auth.register.index')}}">Register</a></p>
+                        </div>
                     </div>
-                </div>
-
-            </fieldset>
-        </form>
+    
+                </fieldset>
+            </form>
+            </div>
+          </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

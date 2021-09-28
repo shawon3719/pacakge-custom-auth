@@ -37,47 +37,55 @@
             </div>
         @endif
 
-        <form class="well form-horizontal" action="{{route('auth.reset.password',$token)}}" method="post" id="password_reset_form">
-            @csrf
-            <fieldset>
-                <legend>Reset Your Password</legend>
-                <input value="{{$email}}" name="email" maxlength="30" placeholder="E-Mail" class="form-control @error('email') is-invalid @enderror" type="hidden">
-                <div class="form-group">
-                    <label class="col-md-4 control-label">New Password</label>
-                    <div class="col-md-4 ">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                            <input name="password" maxlength="16" placeholder="**********" class="form-control @error('password') is-invalid @enderror" type="password">
-                        </div>
-                        @if ($errors->has('password'))
-                            <small class="text-danger">{{ $errors->first('password') }}</small>
-                        @endif
-                    </div>
-                </div>
+        <div id="card">
+            <div id="card-content">
+              <div id="card-title">
+                <h2>RESET PASSWORD</h2>
+                <div class="underline-title"></div>
+              </div>
+              <form class="form-horizontal" action="{{route('auth.reset.password',$token)}}" method="post" id="password_reset_form">
+                @csrf
+                <fieldset>
+                    <input value="{{$email}}" name="email" maxlength="30" placeholder="E-Mail" class="form-control @error('email') is-invalid @enderror" type="hidden">
 
-                <div class="form-group">
-                    <label class="col-md-4 control-label">Confirm New Password</label>
-                    <div class="col-md-4 ">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                            <input name="password_confirmation" maxlength="16" placeholder="**********" class="form-control @error('password') is-invalid @enderror" type="password">
+                    <div class="form-group">
+                        <label class="col-md-12">Password</label>
+                        <div class="col-md-12 ">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input name="password" maxlength="16" placeholder="**********" class="form-control @error('password') is-invalid @enderror" type="password">
+                            </div>
+                            @if ($errors->has('password'))
+                                <small class="text-danger">{{ $errors->first('password') }}</small>
+                            @endif
                         </div>
-                        @if ($errors->has('password'))
-                            <small class="text-danger">{{ $errors->first('password') }}</small>
-                        @endif
                     </div>
-                </div>       
-                      
-                <div class="form-group">
-                    <label class="col-md-4 control-label"></label>
-                    <div class="col-md-4">
-                        <button type="submit" class="form-control btn btn-primary login-button">Reset Your Password</button>
-                        <p class="instruction-text">Remembered old password? <a href="{{route('auth.login.index')}}">Login</a></p>
-                    </div>
-                </div>
 
-            </fieldset>
-        </form>
+                    <div class="form-group">
+                        <label class="col-md-12">Confirm Password</label>
+                        <div class="col-md-12 ">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input name="password_confirmation" maxlength="16" placeholder="**********" class="form-control @error('password') is-invalid @enderror" type="password">
+                            </div>
+                            @if ($errors->has('password'))
+                                <small class="text-danger">{{ $errors->first('password') }}</small>
+                            @endif
+                        </div>
+                    </div>
+    
+                    <div class="form-group">
+                        <label class="col-md-12 control-label"></label>
+                        <div class="col-md-12">
+                            <button type="submit" id="submit-btn">Reset</button>
+                            <p id="signup">Remembered old password? <a href="{{route('auth.login.index')}}">Login</a></p>
+                        </div>
+                    </div>
+    
+                </fieldset>
+            </form>
+            </div>
+          </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

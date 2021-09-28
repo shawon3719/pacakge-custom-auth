@@ -14,14 +14,14 @@ class AuthServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->publishes([
             __DIR__.'/../public/css' => public_path('vendor/sws-auth/css'),
-        ], 'public');
+        ], 'sws-auth');
         $this->publishes([
             __DIR__.'/../public/js' => public_path('vendor/sws-auth/js'),
-        ], 'public');
+        ], 'sws-auth');
 
         $this->publishes([
             __DIR__.'/../config/sws-auth.php' => config_path('sws-auth.php'),
-        ]);
+        ], 'sws-auth');
 
     }
 
