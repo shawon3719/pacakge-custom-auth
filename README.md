@@ -35,22 +35,13 @@
 composer require sws/smartauth
 
 ```
-2. Setup your email configuration to your `.env` file
-3. From the projects root folder run:
+2. add ```sws-auth``` provider to your ```config/app.php``` ```\sws\smartauth\Providers\AuthServiceProvider::class,```
+3. Setup your email configuration to your `.env` file
+4. From the projects root folder run:
 ```
 php artisan vendor:publish --tag=sws-auth
 
 ```
-#### Build the Front End Assets with Mix
-##### Using Yarn:
-1. From the projects root folder run `yarn install`
-2. From the projects root folder run `yarn run dev` or `yarn run production`
-  * You can watch assets with `yarn run watch`
-
-##### Using NPM:
-1. From the projects root folder run `npm install`
-2. From the projects root folder run `npm run dev` or `npm run production`
-  * You can watch assets with `npm run watch`
 
 #### Optionally Build Cache
 1. From the projects root folder run `php artisan config:cache`
