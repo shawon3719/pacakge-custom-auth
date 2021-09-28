@@ -60,7 +60,7 @@ class AuthController extends Controller
         
         $this->authService->register($request);
 
-        return back();
+        return redirect()->route('auth.login.index');
     }
 
 

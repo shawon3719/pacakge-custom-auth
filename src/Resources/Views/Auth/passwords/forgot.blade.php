@@ -42,7 +42,7 @@
                         <div class="col-md-12 ">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                <input name="email" maxlength="30" placeholder="E-Mail" class="form-control" type="text">  
+                                <input value="{{ old('email', null) }}" name="email" maxlength="30" placeholder="E-Mail" class="form-control" type="text">  
                             </div>
                             @if ($errors->has('email'))
                                 <small class="text-danger">{{ $errors->first('email') }}</small>

@@ -53,7 +53,7 @@
                         <div class="col-md-12 ">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                <input name="password" maxlength="16" placeholder="**********" class="form-control @error('password') is-invalid @enderror" type="password">
+                                <input value="{{ old('password', null) }}" name="password" maxlength="16" placeholder="**********" class="form-control @error('password') is-invalid @enderror" type="password">
                             </div>
                             @if ($errors->has('password'))
                                 <small class="text-danger">{{ $errors->first('password') }}</small>
@@ -66,7 +66,7 @@
                         <div class="col-md-12 ">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                <input name="password_confirmation" maxlength="16" placeholder="**********" class="form-control @error('password') is-invalid @enderror" type="password">
+                                <input value="{{ old('password_confirmation', null) }}" name="password_confirmation" maxlength="16" placeholder="**********" class="form-control @error('password') is-invalid @enderror" type="password">
                             </div>
                             @if ($errors->has('password'))
                                 <small class="text-danger">{{ $errors->first('password') }}</small>
