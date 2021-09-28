@@ -28,47 +28,54 @@
             </div>
         @endif
 
-        <form class="well form-horizontal" action="{{route('auth.login.check')}}" method="post" id="login_form">
-            @csrf
-            <fieldset>
-                <legend>Login</legend>
-                <div class="form-group">
-                    <label class="col-md-4 control-label">E-Mail</label>
-                    <div class="col-md-4 ">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                            <input name="email" maxlength="30" placeholder="E-Mail" class="form-control" type="text">  
+        <div id="card">
+            <div id="card-content">
+              <div id="card-title">
+                <h2>LOGIN</h2>
+                <div class="underline-title"></div>
+              </div>
+              <form class="form-horizontal" action="{{route('auth.login.check')}}" method="post" id="login_form">
+                @csrf
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-md-12">E-mail</label>
+                        <div class="col-md-12 ">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                <input name="email" maxlength="30" placeholder="E-Mail" class="form-control" type="text">  
+                            </div>
+                            @if ($errors->has('email'))
+                                <small class="text-danger">{{ $errors->first('email') }}</small>
+                            @endif
                         </div>
-                        @if ($errors->has('email'))
-                            <small class="text-danger">{{ $errors->first('email') }}</small>
-                        @endif
                     </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-md-4 control-label">Password</label>
-                    <div class="col-md-4 ">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                            <input name="password" maxlength="16" placeholder="**********" class="form-control" type="password">
+    
+                    <div class="form-group">
+                        <label class="col-md-12">Password</label>
+                        <div class="col-md-12 ">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input name="password" maxlength="16" placeholder="**********" class="form-control" type="password">
+                            </div>
+                            @if ($errors->has('password'))
+                                <small class="text-danger">{{ $errors->first('password') }}</small>
+                            @endif
                         </div>
-                        @if ($errors->has('password'))
-                            <small class="text-danger">{{ $errors->first('password') }}</small>
-                        @endif
                     </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-md-4 control-label"></label>
-                    <div class="col-md-4">
-                        <button type="submit" class="form-control btn btn-primary login-button">Login</button>
-                        <p class="instruction-text">Forgot Password? <a href="{{route('auth.forgot.password.index')}}">Reset Now.</a></p>
-                        <p class="instruction-text">Don't have an account? <a href="{{route('auth.register.index')}}">Register</a></p>
+    
+                    <div class="form-group">
+                        <label class="col-md-12 control-label"></label>
+                        <div class="col-md-12">
+                            <button type="submit" id="submit-btn">Login</button>
+                            <p id="signup">Forgot Password? <a href="{{route('auth.forgot.password.index')}}">Reset Now.</a></p>
+                            <p id="signup">Don't have an account? <a href="{{route('auth.register.index')}}">Register</a></p>
+                        </div>
                     </div>
-                </div>
-
-            </fieldset>
-        </form>
+    
+                </fieldset>
+            </form>
+            </div>
+          </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

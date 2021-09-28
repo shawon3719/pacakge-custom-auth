@@ -37,72 +37,79 @@
             </div>
         @endif
 
-        <form class="well form-horizontal" action="{{route('auth.register.store')}}" method="post" id="registration_form">
-            @csrf
-            <fieldset>
-                <legend>Register</legend>
-                <div class="form-group">
-                    <label class="col-md-4 control-label">Name</label>
-                    <div class="col-md-4 ">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                            <input name="name" maxlength="30" placeholder="Name" class="form-control @error('name') is-invalid @enderror" type="text" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" >
+        <div id="card">
+            <div id="card-content">
+              <div id="card-title">
+                <h2>REGISTER</h2>
+                <div class="underline-title"></div>
+              </div>
+              <form class="form-horizontal" action="{{route('auth.register.store')}}" method="post" id="registration_form">
+                @csrf
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-md-12">Name</label>
+                        <div class="col-md-12 ">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <input name="name" maxlength="30" placeholder="Name" class="form-control @error('name') is-invalid @enderror" type="text" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" >
+                                </div>
+                                @if ($errors->has('name'))
+                                    <small class="text-danger">{{ $errors->first('name') }}</small>
+                                @endif
                         </div>
                     </div>
-                    @if ($errors->has('name'))
-                        <small class="text-danger">{{ $errors->first('name') }}</small>
-                    @endif
-                </div>
-             
-                <div class="form-group">
-                    <label class="col-md-4 control-label">E-Mail</label>
-                    <div class="col-md-4 ">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                            <input name="email" maxlength="30" placeholder="E-Mail" class="form-control @error('email') is-invalid @enderror" type="text">
+    
+                    <div class="form-group">
+                        <label class="col-md-12">E-mail</label>
+                        <div class="col-md-12 ">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                <input name="email" maxlength="30" placeholder="E-Mail" class="form-control @error('email') is-invalid @enderror" type="text">
+                            </div>
+                            @if ($errors->has('email'))
+                                <small class="text-danger">{{ $errors->first('email') }}</small>
+                            @endif
                         </div>
-                        @if ($errors->has('email'))
-                            <small class="text-danger">{{ $errors->first('email') }}</small>
-                        @endif
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label class="col-md-4 control-label">Password</label>
-                    <div class="col-md-4 ">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                            <input name="password" maxlength="16" placeholder="**********" class="form-control @error('password') is-invalid @enderror" type="password">
+                    <div class="form-group">
+                        <label class="col-md-12">Password</label>
+                        <div class="col-md-12 ">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input name="password" maxlength="16" placeholder="**********" class="form-control @error('password') is-invalid @enderror" type="password">
+                            </div>
+                            @if ($errors->has('password'))
+                                <small class="text-danger">{{ $errors->first('password') }}</small>
+                            @endif
                         </div>
-                        @if ($errors->has('password'))
-                            <small class="text-danger">{{ $errors->first('password') }}</small>
-                        @endif
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label class="col-md-4 control-label">Confirm Password</label>
-                    <div class="col-md-4 ">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                            <input name="password_confirmation" maxlength="16" placeholder="**********" class="form-control @error('password') is-invalid @enderror" type="password">
+                    <div class="form-group">
+                        <label class="col-md-12">Confirm Password</label>
+                        <div class="col-md-12 ">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input name="password_confirmation" maxlength="16" placeholder="**********" class="form-control @error('password') is-invalid @enderror" type="password">
+                            </div>
+                            @if ($errors->has('password'))
+                                <small class="text-danger">{{ $errors->first('password') }}</small>
+                            @endif
                         </div>
-                        @if ($errors->has('password'))
-                            <small class="text-danger">{{ $errors->first('password') }}</small>
-                        @endif
                     </div>
-                </div>       
-                      
-                <div class="form-group">
-                    <label class="col-md-4 control-label"></label>
-                    <div class="col-md-4">
-                        <button type="submit" class="form-control btn btn-primary login-button">Register</button>
-                        <p class="instruction-text">Already have an account? <a href="{{route('auth.login.index')}}">Login</a></p>
+    
+                    <div class="form-group">
+                        <label class="col-md-12 control-label"></label>
+                        <div class="col-md-12">
+                            <button type="submit" id="submit-btn">Sign-up</button>
+                            <p id="signup">Already have an account? <a href="{{route('auth.login.index')}}">Login</a></p>
+                        </div>
                     </div>
-                </div>
-
-            </fieldset>
-        </form>
+    
+                </fieldset>
+            </form>
+            </div>
+          </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

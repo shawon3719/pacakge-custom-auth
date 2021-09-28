@@ -30,7 +30,7 @@ class AuthService
         $token = Crypt::encrypt($request->email);
   
         Mail::send('smartauth::Email.userVerificationEmail', ['user' => $user, 'token' => $token], function($mail) use($user){
-              $mail->from('no-reply@shawon.com');
+              $mail->from(config('sws-auth.send_email_from'));
               $mail->to($user->email);
               $mail->subject('User Verification E-mail');
           });
@@ -69,7 +69,7 @@ class AuthService
                 if($user->first()->email_verified_at != ''){
 
                     Mail::send('smartauth::Email.passwordResetEmail', ['token' => $token], function($mail) use($request){
-                        $mail->from('no-reply@shawon.com');
+                        $mail->from(config('sws-auth.send_email_from'));
                         $mail->to($request->email);
                         $mail->subject('Password Reset E-mail');
                     });
@@ -79,7 +79,7 @@ class AuthService
                 }else{
     
                     $request->session()->flash('failed','your account is not verified yet. we have sent you a verification email at '.$request->email.'. please check your mail and verify your account.');
-                    
+
                 }
             
             }else{
