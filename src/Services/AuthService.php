@@ -22,7 +22,7 @@ class AuthService
         ]);
 
         if($user){
-            $request->session()->flash('success','Registration successfull.');
+            $request->session()->flash('success','Registration successfull. We have sent you an verification email. please go through the email to login.');
         }else{
             $request->session()->flash('failed','Something went wrong, try again later!');
         }

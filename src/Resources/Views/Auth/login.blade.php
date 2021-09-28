@@ -42,7 +42,7 @@
                         <div class="col-md-12 ">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                <input name="email" maxlength="30" placeholder="E-Mail" class="form-control" type="text">  
+                                <input value="{{ old('email', null) }}" name="email" maxlength="30" placeholder="E-Mail" class="form-control" type="text">  
                             </div>
                             @if ($errors->has('email'))
                                 <small class="text-danger">{{ $errors->first('email') }}</small>
@@ -55,7 +55,7 @@
                         <div class="col-md-12 ">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                <input name="password" maxlength="16" placeholder="**********" class="form-control" type="password">
+                                <input value="{{ old('password', null) }}" name="password" maxlength="16" placeholder="**********" class="form-control" type="password">
                             </div>
                             @if ($errors->has('password'))
                                 <small class="text-danger">{{ $errors->first('password') }}</small>
