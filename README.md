@@ -35,7 +35,7 @@
 composer require sws/smartauth
 
 ```
-2. add ```sws-auth``` provider to your ```config/app.php``` ```\sws\smartauth\Providers\AuthServiceProvider::class,```
+2. add ```sws-auth``` provider to your ```config/app.php``` ```\SWS\Auth\Providers\AuthServiceProvider::class,```
 3. Setup your email configuration to your `.env` file
 4. From the projects root folder run:
 ```
