@@ -1,16 +1,15 @@
 <?php
 
-namespace sws\smartauth\Http\Controllers;
+namespace SWS\Auth\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Carbon\Carbon;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Hash;
-use sws\smartauth\Http\Requests\ResetPasswordRequest;
-use sws\smartauth\Http\Requests\StoreUserRequest;
-use sws\smartauth\Services\AuthService;
-use sws\smartauth\Models\Auth;
+use Illuminate\Support\Facades\Session;
+use SWS\Auth\Http\Requests\ResetPasswordRequest;
+use SWS\Auth\Http\Requests\StoreUserRequest;
+use SWS\Auth\Services\AuthService;
 
 class AuthController extends Controller
 {
@@ -25,12 +24,12 @@ class AuthController extends Controller
 
     public function index()
     {
-        return view('smartauth::Auth.register');
+        return view('auth.register');
     }
 
     public function loginIndex()
     {
-        return view('smartauth::Auth.login');
+        return view('auth.login');
     }
 
     public function postLogin(Request $request)
@@ -40,7 +39,8 @@ class AuthController extends Controller
             'password'=>'required|min:8'
        ]);
 
-        if(Auth::loginAttempt($request)){
+        if(User::loginAttempt($request)){
+            $request->session()->flash('success', 'You have successfully Logged-In.');
             return redirect('/');
         }else{
             return redirect()->back();
@@ -51,7 +51,7 @@ class AuthController extends Controller
     public function logout(){
         if(session()->has('LoggedUser')){
             session()->pull('LoggedUser');
-            return redirect()->route('auth.login.index');
+            return redirect()->route('login');
         }
     }
 
@@ -60,7 +60,7 @@ class AuthController extends Controller
         
         $this->authService->register($request);
 
-        return redirect()->route('auth.login.index');
+        return redirect()->route('login');
     }
 
 
@@ -68,12 +68,12 @@ class AuthController extends Controller
     {
         $data = $this->authService->verifyEmail($token);
   
-        return redirect()->route('auth.login.index')->with($data['type'], $data['message']);
+        return redirect()->route('login')->with($data['type'], $data['message']);
     }
 
 
     public function forgotPassword(){
-        return view('smartauth::Auth.passwords.forgot');
+        return view('auth.passwords.forgot');
     }
 
     public function postForgotPassword(Request $request){
@@ -89,12 +89,12 @@ class AuthController extends Controller
 
         $data['email'] = Crypt::decrypt($token);
 
-        $email_exist = Auth::where('email', $data['email'])->first();
+        $email_exist = User::where('email', $data['email'])->first();
 
         if($email_exist){
-            return view('smartauth::Auth.passwords.reset', $data);
+            return view('auth.passwords.reset', $data);
         }else{
-            return redirect()->route('auth.login.index')->with('failed', 'We did not found your email in our system.');
+            return redirect()->route('login')->with('failed', 'We did not found your email in our system.');
         }
     }
 
@@ -103,7 +103,7 @@ class AuthController extends Controller
         $password_reset = $this->authService->resetPassword($request);
 
         if($password_reset){
-            return redirect()->route('auth.login.index');
+            return redirect()->route('login');
         }else{
             return redirect()->back();
         }

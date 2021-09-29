@@ -1,11 +1,11 @@
 <?php
 
-Route::group(['middleware' => ['web'], 'namespace'=>'sws\smartauth\Http\Controllers'], function(){
+Route::group(['middleware' => ['web'], 'namespace'=>'SWS\Auth\Http\Controllers'], function(){
 
-    Route::get('register', 'AuthController@index')->name('auth.register.index');
+    Route::get('register', 'AuthController@index')->name('register');
     Route::post('register', 'AuthController@register')->name('auth.register.store');
 
-    Route::get('login', 'AuthController@loginIndex')->name('auth.login.index');
+    Route::get('login', 'AuthController@loginIndex')->name('login');
     Route::post('login', 'AuthController@postLogin')->name('auth.login.check');
 
     Route::get('forgot-password', 'AuthController@forgotPassword')->name('auth.forgot.password.index');
