@@ -32,7 +32,7 @@
 ### Installation Instructions
 1. run :
 ```
-composer require sws/smartauth
+composer require sws/smartauth --v.1.1
 
 ```
 2. add ```sws-auth``` provider to your ```config/app.php``` ```\SWS\Auth\Providers\AuthServiceProvider::class,```
