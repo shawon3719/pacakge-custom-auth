@@ -27,18 +27,18 @@
                 <strong>Sorry!</strong> {{ Session::get('failed') }}
             </div>
         @endif
-
         <div id="card">
             <div id="card-content">
               <div id="card-title">
-                <h2>LOGIN</h2>
+                <h2>RESET PASSWORD</h2>
                 <div class="underline-title"></div>
               </div>
-              <form class="form-horizontal" action="{{route('auth.login.check')}}" method="post" id="login_form">
+              <form class="form-horizontal" action="{{route('auth.forgot.password')}}" method="post" id="forgot_password_form">
                 @csrf
                 <fieldset>
                     <div class="form-group">
                         <label class="col-md-12">E-mail</label>
+                        <small class="col-md-12" style="font-size: 10px; margin-bottom: 10px">Please enter your email. we will send you a password reset link on your email.</small>
                         <div class="col-md-12 ">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
@@ -49,26 +49,12 @@
                             @endif
                         </div>
                     </div>
-    
-                    <div class="form-group">
-                        <label class="col-md-12">Password</label>
-                        <div class="col-md-12 ">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                <input value="{{ old('password', null) }}" name="password" maxlength="16" placeholder="**********" class="form-control" type="password">
-                            </div>
-                            @if ($errors->has('password'))
-                                <small class="text-danger">{{ $errors->first('password') }}</small>
-                            @endif
-                        </div>
-                    </div>
-    
                     <div class="form-group">
                         <label class="col-md-12 control-label"></label>
                         <div class="col-md-12">
-                            <button type="submit" id="submit-btn">Login</button>
-                            <p id="signup">Forgot Password? <a href="{{route('auth.forgot.password.index')}}">Reset Now.</a></p>
-                            <p id="signup">Don't have an account? <a href="{{route('auth.register.index')}}">Register</a></p>
+                            <button type="submit" id="submit-btn">Request Reset</button>
+                            <p id="signup">Password Remembered? <a href="{{route('login')}}">Login</a></p>
+                            <p id="signup">Don't have an account? <a href="{{route('register')}}">Register</a></p>
                         </div>
                     </div>
     
@@ -82,6 +68,5 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
     <script src="{{asset('vendor/sws-auth/js/sws-auth-script.js')}}"></script>
-
 </body>
 </html>

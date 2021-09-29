@@ -1,20 +1,21 @@
 <?php
 
-namespace sws\smartauth\Models;
+namespace App\Models;
 
 use Carbon\Carbon;
 use DateTimeInterface;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Laravel\Sanctum\HasApiTokens;
 
-use function PHPUnit\Framework\isNull;
-
-class Auth extends Model
+class User extends Authenticatable
 {
-    use SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     protected $guarded = [];
 
@@ -74,7 +75,7 @@ class Auth extends Model
 
         $credentials = $request->only('email', 'password');
 
-        $userInfo = Auth::where('email','=', $credentials['email'])->first();
+        $userInfo = User::where('email','=', $credentials['email'])->first();
 
         if(!$userInfo){
 
@@ -116,5 +117,4 @@ class Auth extends Model
             return false;
         }
     }
-
 }

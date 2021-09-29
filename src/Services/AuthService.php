@@ -1,21 +1,20 @@
 <?php
 
-namespace sws\smartauth\Services;
+namespace SWS\Auth\Services;
 
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use sws\smartauth\Models\Auth;
+use SWS\Auth\Models\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Crypt;
-
-use function PHPUnit\Framework\isNull;
 
 class AuthService
 {
     public function register($request){
 
-        $user = Auth::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -29,7 +28,7 @@ class AuthService
 
         $token = Crypt::encrypt($request->email);
   
-        Mail::send('smartauth::Email.userVerificationEmail', ['user' => $user, 'token' => $token], function($mail) use($user){
+        Mail::send('email.userVerificationEmail', ['user' => $user, 'token' => $token], function($mail) use($user){
               $mail->from(config('sws-auth.send_email_from'));
               $mail->to($user->email);
               $mail->subject('User Verification E-mail');
@@ -41,7 +40,7 @@ class AuthService
 
         $email = Crypt::decrypt($token);
 
-        $user = Auth::where('email', $email)->first();
+        $user = User::where('email', $email)->first();
 
         if(!is_null($user) ){
                 $user->email_verified_at = Carbon::now('Asia/Dhaka');
@@ -60,7 +59,7 @@ class AuthService
 
         if(isset($request->email)){
 
-            $user = Auth::where('email', $request->email);
+            $user = User::where('email', $request->email);
 
             $token = Crypt::encrypt($request->email);
 
@@ -68,7 +67,7 @@ class AuthService
 
                 if($user->first()->email_verified_at != ''){
 
-                    Mail::send('smartauth::Email.passwordResetEmail', ['token' => $token], function($mail) use($request){
+                    Mail::send('email.passwordResetEmail', ['token' => $token], function($mail) use($request){
                         $mail->from(config('sws-auth.send_email_from'));
                         $mail->to($request->email);
                         $mail->subject('Password Reset E-mail');
@@ -94,7 +93,7 @@ class AuthService
 
         if(isset($request->email)){
             
-            $user = Auth::where('email', $request->email)->first();
+            $user = User::where('email', $request->email)->first();
 
             if(!empty($user) && $user->email != null){
 

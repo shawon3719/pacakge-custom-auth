@@ -1,6 +1,6 @@
 <?php
 
-namespace sws\smartauth\Http\Requests;
+namespace SWS\Auth\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

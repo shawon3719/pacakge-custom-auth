@@ -40,44 +40,20 @@
         <div id="card">
             <div id="card-content">
               <div id="card-title">
-                <h2>REGISTER</h2>
+                <h2>RESET PASSWORD</h2>
                 <div class="underline-title"></div>
               </div>
-              <form class="form-horizontal" action="{{route('auth.register.store')}}" method="post" id="registration_form">
+              <form class="form-horizontal" action="{{route('auth.reset.password',$token)}}" method="post" id="password_reset_form">
                 @csrf
                 <fieldset>
-                    <div class="form-group">
-                        <label class="col-md-12">Name</label>
-                        <div class="col-md-12 ">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                    <input value="{{ old('name', null) }}" name="name" maxlength="30" placeholder="Name" class="form-control @error('name') is-invalid @enderror" type="text" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" >
-                                </div>
-                                @if ($errors->has('name'))
-                                    <small class="text-danger">{{ $errors->first('name') }}</small>
-                                @endif
-                        </div>
-                    </div>
-    
-                    <div class="form-group">
-                        <label class="col-md-12">E-mail</label>
-                        <div class="col-md-12 ">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                <input name="email" value="{{ old('email', null) }}" maxlength="30" placeholder="E-Mail" class="form-control @error('email') is-invalid @enderror" type="text">
-                            </div>
-                            @if ($errors->has('email'))
-                                <small class="text-danger">{{ $errors->first('email') }}</small>
-                            @endif
-                        </div>
-                    </div>
+                    <input value="{{$email}}" name="email" maxlength="30" placeholder="E-Mail" class="form-control @error('email') is-invalid @enderror" type="hidden">
 
                     <div class="form-group">
                         <label class="col-md-12">Password</label>
                         <div class="col-md-12 ">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                <input name="password" value="{{ old('password', null) }}" maxlength="16" placeholder="**********" class="form-control @error('password') is-invalid @enderror" type="password">
+                                <input value="{{ old('password', null) }}" name="password" maxlength="16" placeholder="**********" class="form-control @error('password') is-invalid @enderror" type="password">
                             </div>
                             @if ($errors->has('password'))
                                 <small class="text-danger">{{ $errors->first('password') }}</small>
@@ -101,8 +77,8 @@
                     <div class="form-group">
                         <label class="col-md-12 control-label"></label>
                         <div class="col-md-12">
-                            <button type="submit" id="submit-btn">Sign-up</button>
-                            <p id="signup">Already have an account? <a href="{{route('auth.login.index')}}">Login</a></p>
+                            <button type="submit" id="submit-btn">Reset</button>
+                            <p id="signup">Remembered old password? <a href="{{route('login')}}">Login</a></p>
                         </div>
                     </div>
     
@@ -116,6 +92,5 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
     <script src="{{asset('vendor/sws-auth/js/sws-auth-script.js')}}"></script>
-
 </body>
 </html>

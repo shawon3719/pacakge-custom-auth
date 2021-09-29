@@ -1,5 +1,5 @@
 {
-    "name": "sws/smartauth",
+    "name": "sws/sws-auth",
     "description": "Custom authentication package including registration, login, email verification and more.",
     "type": "library",
     "license": "MIT",
@@ -9,13 +9,12 @@
             "email": "shawon3719@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php": "^7.4|^8.0"
     },
     "autoload": {
         "psr-4": {
-          "sws\\smartauth\\": "src/"
+          "sws\\sws-auth\\": "src/"
         }
     }
 }
